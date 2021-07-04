@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+   <meta charset = "UTF-8">
+   <title>Speech Recognition</title>
+   <link rel="preconnect" href="https://fonts.gstatic.com">
+   <link href="https://fonts.googleapis.com/css2?family=Pattaya&display=swap" rel="stylesheet">
+   <link rel="stylesheet" href="{{url_for('static', filename ='styles/index.css')}}">
+
+</head>
+<body>
+<div id="speechContainer">
+   <h1>Upload new File</h1>
+   <form action = '/' method="POST" enctype="multipart/form-data">
+       <input type="file" name="file"/>
+       <br>
+       <br>
+       <div class="col-md-3">
+    <label for="language" class="form-label">Language</label>
+    <select class="form-select" id="language" name= "language" required>
+    <option selected disabled value="">Choose...</option>
+    {% for lang in LANGUAGES.values()  %}
+      <option>{{lang}}</option>
+   {% endfor %}
+    </select>
+  </div>
+       <br>
+       <input type ="submit" id="submitButton" value="Transcribe"/>
+       </form>
+       
+    {% if transcript!= ""  %}
+    <div id= "trans">
+      <h1>Transcript</h1>
+      <p>Text Language {{lang.lang}}</p>
+      <br>
+      <p id = "speechText">{{transcript}}</p>
+      <br>
+      <p> Chosen language {{dest_lang}}</P>
+      <br>
+      <p id = "speechText">{{convert_text.text}}</p>
+      
+    </div>
+    {% endif %}
+
+</div>
+
+
+</body>
+</html>
